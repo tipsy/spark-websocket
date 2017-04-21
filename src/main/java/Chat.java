@@ -39,7 +39,7 @@ public class Chat {
         return article().with(
                 b(sender + " says:"),
                 p(message),
-                span().withClass("timestamp").withText(new SimpleDateFormat("HH:mm:ss").format(new Date()))
+                span(new SimpleDateFormat("HH:mm:ss").format(new Date())).withClass("timestamp")
         ).render();
     }
 
