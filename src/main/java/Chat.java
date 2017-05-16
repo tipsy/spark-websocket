@@ -1,8 +1,10 @@
-import org.eclipse.jetty.websocket.api.*;
-import org.json.*;
-import java.text.*;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.eclipse.jetty.websocket.api.Session;
+import org.json.JSONObject;
 
 import static j2html.TagCreator.*;
 import static spark.Spark.*;
@@ -36,10 +38,10 @@ public class Chat {
 
     //Builds a HTML element with a sender-name, a message, and a timestamp,
     private static String createHtmlMessageFromSender(String sender, String message) {
-        return article().with(
-                b(sender + " says:"),
-                p(message),
-                span(new SimpleDateFormat("HH:mm:ss").format(new Date())).withClass("timestamp")
+        return article(
+            b(sender + " says:"),
+            span(attrs(".timestamp"), new SimpleDateFormat("HH:mm:ss").format(new Date())),
+            p(message)
         ).render();
     }
 
